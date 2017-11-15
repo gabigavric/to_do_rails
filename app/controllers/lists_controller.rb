@@ -2,25 +2,23 @@ class ListsController < ApplicationController
   # Lists all lists in the db
   def index
     @lists = List.all
-    render :index
   end
 
   # Selects a specific list from the db
   def show
     @list = List.find(params[:id])
-    render :show
   end
 
   # Renders a form to CREATE a new list in the db
   def new
     @list = List.new
-    render :new
   end
 
   # Creates an entry in the db
   def create
-    @list = List.new(list_params)
+    @list = List.new(params[:list])
     if @list.save
+      flash[:notice] = "list succesfully added!"
       redirect_to lists_path
     else
       render :new
@@ -31,7 +29,6 @@ class ListsController < ApplicationController
   def edit
     binding.pry
     @list = List.find(params[:id])
-    render :edit
   end
 
   # Updates the form in the db
