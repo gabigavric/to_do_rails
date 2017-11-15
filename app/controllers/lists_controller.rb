@@ -16,7 +16,7 @@ class ListsController < ApplicationController
 
   # Creates an entry in the db
   def create
-    @list = List.new(params[:list])
+    @list = List.new(list_params)
     if @list.save
       flash[:notice] = "list succesfully added!"
       redirect_to lists_path
